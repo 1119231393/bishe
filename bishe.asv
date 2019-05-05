@@ -4,7 +4,7 @@ list=dir(PathRoot);
 fileNum=size(list); 
 
 %for k=3:fileNum
-for k=2+picnumber:2+picnumber
+for k=3:fileNum
 	disp(list(k).name)  % 这就是文件名，如果有子文件夹，则也包含在里面。
 %f1=imread('1479305870650c.jpg');
 f1=imread(strcat(PathRoot,list(k).name));
@@ -361,35 +361,7 @@ RGB1=imcrop(RGB,[x(1),y(1),x(2)-x(1),y(2)-y(1)]);
 figure(22),
 imshow(RGB1);
 saveas(gcf,['C:\Users\hasee\Desktop\graduation project\ROIresult\',list(k).name]);
-%ROI特征提取
-figure(111),
-subplot(231);imshow(uint8(RGB1));title('ROI');
-Sx=5;
-Sy=5;
-sigma=[5,10];
-theta=[0,pi/2];
-I=rgb2gray(RGB1);
 
-figure(111),
-subplot(236);imshow(uint8(I));title('rgb2gray(f1)');
-[G1,gabout1]=gaborfilter(I,Sx,Sy,sigma(1),theta(1));
-[G2,gabout2]=gaborfilter(I,Sx,Sy,sigma(2),theta(1));
-[G3,gabout3]=gaborfilter(I,Sx,Sy,sigma(1),theta(2));
-[G4,gabout4]=gaborfilter(I,Sx,Sy,sigma(2),theta(2));
-figure(111),
-subplot(232);imshow(uint8(gabout1));title('gabout1');
-subplot(233);imshow(uint8(gabout2));title('gabout2');
-subplot(234);imshow(uint8(gabout3));title('gabout3');
-subplot(235);imshow(uint8(gabout4));title('gabout4')
-[m,n]=size(gabout1);
-gaboutavg=zeros(m,n);
-for i=1:m
-    for j=1:n
-        gaboutavg(i,j)=(gabout1(i,j)+gabout2(i,j)+gabout3(i,j)+gabout4(i,j))/4;
-    end
-end
-    [gaboutavg]=bigabout(gaboutavg);
-    picgaborcode=reshape(gaboutavg,1,m*n) ;
 
 
  end
